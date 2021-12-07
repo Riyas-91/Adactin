@@ -19,7 +19,7 @@ public class Base_Class {
 		}
 		else if (type.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver",
-			System.getProperty("user.dir")+"//Driver//firefoxdriver.exe");
+			System.getProperty("user.dir")+"//Driver//geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
 		
@@ -34,6 +34,13 @@ public class Base_Class {
 	}
 	public static void clickOnElement(WebElement element) {
 		element.click();
+	}
+	
+	public static void wait (WebElement element,int value ,String type) {
+		
+	}
+	public static void clearall(WebElement element) {
+		element.clear();
 	}
 	public static void dropdown(String type,WebElement element ,String value) {
 	  Select s1 = new Select(element);
