@@ -23,10 +23,9 @@ public class Test_runner extends Base_class {
 		WebElement clk =driver.findElement(By.id("login"));
 		clickOnElement(clk);
 	
-	   WebElement location = driver.findElement(By.id("location"));
+	    WebElement location = driver.findElement(By.id("location"));
 	
 		dropdown("index",location,"8");
-		
 		
 		WebElement hotel = driver.findElement(By.xpath("//select[@id='hotels']"));
 		

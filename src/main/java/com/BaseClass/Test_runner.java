@@ -1,76 +1,87 @@
 package com.BaseClass;
 
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
+import com.po_manager.Page_Object_Manager;
 
-import com.pom.BookHotel_P4;
-import com.pom.Confirmation_P5;
-import com.pom.Home_Page;
-import com.pom.Search_Hotel_P2;
-import com.pom.SelectHotel_P3;
 
-public class Test_runner extends Base_Class {
+    public class Test_runner extends Base_Class {
 
 	public static WebDriver driver = getBrowser("chrome");
 	
-	public static Home_Page hp = new Home_Page(driver);
+	public static Page_Object_Manager pom = new Page_Object_Manager(driver);
 	
-	public static Search_Hotel_P2 sh = new Search_Hotel_P2(driver);
+	static Logger log = Logger.getLogger(Properties.class);
 	
-	public static SelectHotel_P3 p3 = new SelectHotel_P3(driver);
-	
-	public static BookHotel_P4 p4 = new BookHotel_P4 (driver);
-	
-	public static Confirmation_P5 p5 = new Confirmation_P5(driver);
-	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Throwable {
 		
+		PropertyConfigurator.configure("log4j.properties");
 		url("https://adactinhotelapp.com/index.php");
 		
-		inputValueElement(hp.getUsername(), "Riyas1226");
+		log.info("url launched");
 		
-		inputValueElement(hp.getPwd(), "Chelsea@1226");
+        String username = particular_data("C:\\Users\\riyas\\Desktop\\Mavenproject\\TeamCaptains.xlsx", 2,1,0);
 		
-		clickOnElement(hp.getClk());
+		inputValueElement(pom.getInstanceHp().getUsername(), username );
 		
-		dropdown("index",sh.getLocation(), "8" );
-		dropdown("value",sh.getHotel(), "Hotel Sunshine");
-		dropdown("value",sh.getRoomtype(),"Super Deluxe");
-		dropdown("index", sh.getRoomno(),"2");
-		clearall(sh.getCheckin());
-		inputValueElement(sh.getCheckin(), "12/12/2021");
-		clearall(sh.getCheckout());
-		inputValueElement(sh.getCheckout(), "14/12/2021");
-		dropdown("index", sh.getAdults(), "2");
-		dropdown("index", sh.getChilds(), "2");
-		clickOnElement(sh.getSubmit());
+		String password = particular_data("C:\\Users\\riyas\\Desktop\\Mavenproject\\TeamCaptains.xlsx",2,1,1);
 		
-		clickOnElement(p3.getRadio());
-		clickOnElement(p3.getContin());
+		inputValueElement(pom.getInstanceHp().getPwd(), password);
 		
-		inputValueElement(p4.getFirstname(),"Shahid");
-		inputValueElement(p4.getLastname(), "Afaan");
-		inputValueElement(p4.getAdd(), "Arasamaram Street");
-		inputValueElement(p4.getAdd(), "\n");
-		inputValueElement(p4.getAdd(), "Vembar Patty");
-		inputValueElement(p4.getAdd(), "\n");
-		inputValueElement(p4.getAdd(), "Dindigul");
-		inputValueElement(p4.getAdd(), "\n");
+		log.info("Username and password entered");
+		clickOnElement(pom.getInstanceHp().getClk());
+		log.info("Home page opened");
 		
-		inputValueElement(p4.getCardno(), "8908987643273464");
-		dropdown("value", p4.getCardtype(), "VISA");
-		dropdown("index", p4.getExpirym(), "5");
-		dropdown("value", p4.getExpiryy(), "2022");
-		inputValueElement(p4.getCvv(), "890");
+		String city = particular_data("C:\\Users\\riyas\\Desktop\\Mavenproject\\TeamCaptains.xlsx", 2,3,1);
+		dropdown("index",pom.getInstanceP2().getLocation(), city );
 		
-		clickOnElement(p4.getBooknow());
+		String hotelname = particular_data("C:\\Users\\riyas\\Desktop\\Mavenproject\\TeamCaptains.xlsx", 2,5,1);
+		dropdown("value",pom.getInstanceP2().getHotel(), hotelname);
+		
+		String hotelclass1 = particular_data("C:\\Users\\riyas\\Desktop\\Mavenproject\\TeamCaptains.xlsx", 2,6,1);
+		dropdown("value",pom.getInstanceP2().getRoomtype(),hotelclass1);
+		
+		dropdown("index",pom.getInstanceP2().getRoomno(),"2");
+		clearall(pom.getInstanceP2().getCheckin());
+		inputValueElement(pom.getInstanceP2().getCheckin(), "22/12/2021");
+		clearall(pom.getInstanceP2().getCheckout());
+		inputValueElement(pom.getInstanceP2().getCheckout(), "26/12/2021");
+		dropdown("index", pom.getInstanceP2().getAdults(), "2");
+		dropdown("index", pom.getInstanceP2().getChilds(), "2");
+		clickOnElement(pom.getInstanceP2().getSubmit());
+		
+		clickOnElement(pom.getInstanceP3().getRadio());
+		clickOnElement(pom.getInstanceP3().getContin());
+		
+		inputValueElement(pom.getInstanceP4().getFirstname(),"Shahid");
+		inputValueElement(pom.getInstanceP4().getLastname(), "Afaan");
+		inputValueElement(pom.getInstanceP4().getAdd(), "Arasamaram Street");
+		inputValueElement(pom.getInstanceP4().getAdd(), "\n");
+		inputValueElement(pom.getInstanceP4().getAdd(), "Vembar Patty");
+		inputValueElement(pom.getInstanceP4().getAdd(), "\n");
+		inputValueElement(pom.getInstanceP4().getAdd(), "Dindigul");
+		inputValueElement(pom.getInstanceP4().getAdd(), "\n");
+		
+		inputValueElement(pom.getInstanceP4().getCardno(), "8908987643273464");
+		dropdown("value", pom.getInstanceP4().getCardtype(), "VISA");
+		dropdown("index", pom.getInstanceP4().getExpirym(), "5");
+		dropdown("value", pom.getInstanceP4().getExpiryy(), "2022");
+		inputValueElement(pom.getInstanceP4().getCvv(), "890");
+		
+		clickOnElement(pom.getInstanceP4().getBooknow());
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-		clickOnElement(p5.getMyitenary());
+		clickOnElement(pom.getInstanceP5().getMyitenary());
 		
+	   screenshot();
 		
 		
 	}
+
+	
 }

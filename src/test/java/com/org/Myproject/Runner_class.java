@@ -2,6 +2,9 @@ package com.org.Myproject;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -12,10 +15,12 @@ import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.Select;
 
 public class Runner_class {
+	
+	static Logger log = Logger.getLogger(Runner_class.class);
 
 	public static void main(String[] args) throws InterruptedException, Throwable {
 		
-		
+		PropertyConfigurator.configure("log4j.properties");
 		System.setProperty("webdriver.chrome.driver",
 				System.getProperty("user.dir")+"//Driver//chromedriver.exe");
 		
@@ -24,8 +29,9 @@ public class Runner_class {
          driver.manage().window().maximize();
  		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
  		
- 	String url =	driver.getCurrentUrl();
- 	System.out.println("WebsiteName:"+" "+url);
+ 		log.info("Webaddress launch successfully");
+ 	//String url =	driver.getCurrentUrl();
+ 	//System.out.println("WebsiteName:"+" "+url);
  	System.out.println(" ");
  		
  		WebElement username = driver.findElement(By.id("username"));
@@ -34,7 +40,7 @@ public class Runner_class {
  		WebElement pwd = driver.findElement(By.id("password"));
  		pwd.sendKeys("Chelsea@1226");
  		
- 		
+ 		log.info("Username & Password entered successfully");
  		Thread.sleep(2000);
  		
  		driver.findElement(By.id("login")).click();
@@ -45,7 +51,8 @@ public class Runner_class {
  		Select s1 = new Select(location);
  		s1.selectByVisibleText("Paris");
  		String city = s1.getFirstSelectedOption().getText();
- 		System.out.println("Selected City:"+" "+city);
+ 		//System.out.println("Selected City:"+" "+city);
+ 		log.info("City Selected Successfully");
  		System.out.println(" ");
  		
  		Thread.sleep(2000);
@@ -53,8 +60,8 @@ public class Runner_class {
  		Select s2 = new Select(hotel);
  		s2.selectByVisibleText("Hotel Sunshine");
  		String venue = s2.getFirstSelectedOption().getText();
- 		System.out.println("Selected Hotel:"+" "+venue);
- 		
+ 		//System.out.println("Selected Hotel:"+" "+venue);
+ 		log.info("Hotel Selected Successfully");
  		System.out.println(" ");
  		
  		Thread.sleep(2000);
@@ -63,7 +70,9 @@ public class Runner_class {
  		Select s3 = new Select(roomtype);
  		s3.selectByVisibleText("Super Deluxe");
  		String roomname = s3.getFirstSelectedOption().getText();
- 		System.out.println("Room_Type:"+" "+roomname);
+ 		//System.out.println("Room_Type:"+" "+roomname);
+ 		
+ 		log.info("Roomtype Selected Successfully");
  		System.out.println(" ");
  		
  		Thread.sleep(2000);
@@ -72,7 +81,8 @@ public class Runner_class {
  		Select s4 = new Select(roomno);
  		s4.selectByIndex(2);
  		String totalrooms = s4.getFirstSelectedOption().getText();
- 		System.out.println("Total Rooms:"+" "+totalrooms);
+ 		//System.out.println("Total Rooms:"+" "+totalrooms);
+ 		log.info("Total Rooms selected Successfully");
  		System.out.println(" ");
  		
  		Thread.sleep(2000);
@@ -83,7 +93,9 @@ public class Runner_class {
  		checkin.sendKeys("02/12/2021");
  		Thread.sleep(2000);
  		String d1 = checkin.getAttribute("value");
- 		System.out.println("CheckinDate:"+" "+d1);
+ 		//System.out.println("CheckinDate:"+" "+d1);
+ 		
+ 		log.info("Check In Date entered successfully");
  		System.out.println(" ");
  		
  		
@@ -92,21 +104,24 @@ public class Runner_class {
  		Thread.sleep(1000);
  		checkout.sendKeys("06/12/2021");
  		String d2 = checkout.getAttribute("value");
- 		System.out.println("CheckoutDate:"+" "+d2);
+ 		//System.out.println("CheckoutDate:"+" "+d2);
+ 		log.info("Check Out Date entered successfully");
  		System.out.println(" ");
  		
  		WebElement adults = driver.findElement(By.id("adult_room"));
  		Select s5 = new Select(adults);
  		s5.selectByIndex(2);
  		String adultno = s5.getFirstSelectedOption().getText();
- 		System.out.println("Total Adults:"+" "+adultno);
+ 		//System.out.println("Total Adults:"+" "+adultno);
+ 		log.info("Total Adults entered successfully");
  		System.out.println(" ");
  		
  		WebElement childs = driver.findElement(By.xpath("//select[@id='child_room']"));
  		Select s6 = new Select(childs);
  		s6.selectByIndex(1);
  		String childno = s6.getFirstSelectedOption().getText();
- 		System.out.println("Total Childs:"+" "+childno);
+ 	//	System.out.println("Total Childs:"+" "+childno);
+ 		log.info("Total Child entered successfully");
  		System.out.println(" ");
  		Thread.sleep(2000);
  		
@@ -120,7 +135,7 @@ public class Runner_class {
  		WebElement fistname = driver.findElement(By.id("first_name"));
  		fistname.sendKeys("Riyas");
  		String fname = fistname.getAttribute("value");
- 		System.out.println("CustomerName:"+" "+fname);
+ 		//System.out.println("CustomerName:"+" "+fname);
  		
  		WebElement lastname = driver.findElement(By.id("last_name"));
  		lastname.sendKeys("Afaan");
